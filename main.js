@@ -1,15 +1,18 @@
-const port = 3000,
-http = require("http"),
-//httpStatus = require("http-status-codes"),
-app = http.createServer((request,response)=>{
-  console.log("Recieved an icoming request");
-  response.writeHead(241,{
-    'content-Type': 'text/html'
-  });
-  let responseMessage = "<h1> Hello, Universe<h1>";
-  response.write(responseMessage);
-  response.end();
-  console.log('sent a response : ${responseMessage}');
+const port = 80,
+
+express = require("express"),
+app = express();
+
+app.get('/Version', function(req, res, next) {
+    res.send("This    is version 0 of the HotBurger service");
 });
-app.listen(port);
-console.log('the server has started and is listening on port number: 80');
+
+
+app.get('/log', function(req, res, next) {
+  res.send(req.url);
+});
+
+app.listen(port,() => {
+  console.log("server is up and running on port 80");
+});
+
